@@ -28,11 +28,14 @@ class UserController {
         if (!helper.isValidPhone(req.body.phone)) {
             return res.status(400).send({'message': 'Please enter a valid phone number'});
         }
+
+        const hashPassword = helper.hashPassword(req.body.password);
+
         try {
             const {id} = req.params;
             const {first_name, last_name, email, phone, password} = req.body;
             const updateUser = await pool.query("UPDATE users SET first_name= $1, last_name = $2, email= $3, phone= $4, password= $5  WHERE user_id = $6",
-                [first_name, last_name, email, phone, password, id]);
+                [first_name, last_name, email, phone, hashPassword, id]);
             res.json('User was updated!');
         } catch (error) {
             console.error(error);
