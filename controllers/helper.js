@@ -15,7 +15,15 @@ class Helper {
     }
 
     isValidPhone(phone) {
-        return /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g.test(phone);
+        return /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/.test(phone);
+    }
+
+    isValidFirstName(first_name) {
+        return /^[a-zA-Z]+$/.test(first_name);
+    }
+
+    isValidLastName(last_name) {
+        return /^[a-zA-Z]+$/.test(last_name);
     }
 
     generateToken(id) {

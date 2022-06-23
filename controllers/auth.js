@@ -11,6 +11,12 @@ class AuthController {
         if (!helper.isValidPhone(req.body.phone)) {
             return res.status(400).send({'message': 'Please enter a valid phone number'});
         }
+        if (!helper.isValidFirstName(req.body.first_name)) {
+            return res.status(400).send({'message': 'Please enter a valid first name'});
+        }
+        if (!helper.isValidLastName(req.body.last_name)) {
+            return res.status(400).send({'message': 'Please enter a valid last name'});
+        }
 
         const hashPassword = helper.hashPassword(req.body.password);
 
