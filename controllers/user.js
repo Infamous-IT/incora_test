@@ -1,4 +1,5 @@
 const pool = require("../config/db");
+const helper = require("./helper");
 
 class UserController {
     async getUsers(req, res) {
@@ -21,6 +22,12 @@ class UserController {
     }
 
     async update(req, res) {
+        if (!helper.isValidEmail(req.body.email)) {
+            return res.status(400).send({'message': 'Please enter a valid email address'});
+        }
+        if (!helper.isValidPhone(req.body.phone)) {
+            return res.status(400).send({'message': 'Please enter a valid phone number'});
+        }
         try {
             const {id} = req.params;
             const {first_name, last_name, email, phone, password} = req.body;
